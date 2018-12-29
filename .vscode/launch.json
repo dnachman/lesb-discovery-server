@@ -1,0 +1,14 @@
+{
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Spring Boot-DiscoveryServerApplication<discovery-server>",
+			"request": "launch",
+			"cwd": "${workspaceFolder}",
+			"console": "internalConsole",
+			"mainClass": "com.logicalenigma.springboot.discoveryserver.DiscoveryServerApplication",
+			"projectName": "discovery-server",
+			"args": ""
+		}
+	]
+}

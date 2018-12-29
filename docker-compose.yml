@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  discovery-server:
+    image: discovery-server
+    build: .
+    ports:
+      - 8761:8761
