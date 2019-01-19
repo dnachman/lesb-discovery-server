@@ -1,0 +1,17 @@
+version: '3.0'
+
+services:
+  discovery-server:
+    image: logicalenigma/discovery-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+  gateway-backend:
+    image: logicalenigma/gateway-backend:0.0.1-SNAPSHOT
+    ports: 
+      - 8080:8080
+  service-hostinfo:
+    image: logicalenigma/service-hostinfo:0.0.1-SNAPSHOT
+    ports: 
+      - 8101:8101
+    environment:
+      JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://discovery-server:8761/eureka'
