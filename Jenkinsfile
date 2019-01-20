@@ -17,6 +17,7 @@ node {
 		 	sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore install dockerfile:build"
 	 }
 	 stage('Push image') {
+		 	// push docker image
 		 	sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore dockerfile:push"
 	 }
    stage('Results') {
