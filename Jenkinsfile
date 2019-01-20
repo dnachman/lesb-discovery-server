@@ -14,7 +14,7 @@ node {
    }
 	 stage('Package/Push image') {
 		 	// build docker image
-			def dockerImage = docker.build("logicalenigma/discovery-server:${env.BUILD_ID}")
+			def dockerImage = docker.build("dnachman/discovery-server:build-${env.BUILD_ID}")
 			dockerImage.push()
 	 }
    stage('Results') {
