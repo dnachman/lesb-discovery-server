@@ -12,13 +12,10 @@ node {
       // Run the maven build
       sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
    }
-	 stage('Package image') {
+	 stage('Package/Push image') {
 		 	// build docker image
-		 	sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore install dockerfile:build"
-	 }
-	 stage('Push image') {
-		 	// push docker image
-		 	sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore dockerfile:push"
+			def dockerImage = docker.build("logicalenigma/discovery-server:${env.BUILD_ID}")
+			dockerImage.push()
 	 }
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
