@@ -10,3 +10,7 @@ A spring boot / spring cloud end to end example
 |app-home|8001||
 |service-hostinfo|8101||
 |service-comments|8102||
+
+
+Notes:
+- https://github.com/spring-cloud/spring-cloud-netflix/issues/1820
