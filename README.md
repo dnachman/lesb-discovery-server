@@ -1,15 +1,15 @@
 A spring boot / spring cloud end to end example
 
 
-|Component|Port|Docker Name|
-|---|---|---|
-|discovery-server|8761||
-|config-server|8888||
-|gateway-backend|8080||
-|gateway-frontend|8081||
-|app-home|8001||
-|service-hostinfo|8101||
-|service-comments|8102||
+|Component|Port|Docker Name|Source Code|
+|---|---|---|---|
+|discovery-server|8761|logicalenigma/discovery-server|https://github.com/dnachman/lesb-discovery-server|
+|config-server|8888|Not implemented yet||
+|gateway-backend|8080|logicalenigma/gateway-backend|https://github.com/dnachman/lesb-gateway-backend|
+|gateway-frontend|8081|Not implemented yet||
+|app-home|8001|Not implemented yet||
+|service-hostinfo|8101|logicalenigma/service-hostinfo|https://github.com/dnachman/lesb-service-hostinfo|
+|service-comments|8102|Coming soon|https://github.com/dnachman/lesb-service-comments|
 
 
 Notes:
