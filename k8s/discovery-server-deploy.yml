@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-server-svc
+  labels:
+    app: discovery-server
+spec:
+  type: NodePort
+  ports:
+  - port: 8761
+    nodePort: 38761
+    protocol: TCP
+  selector:
+    app: discovery-server
+
+

@@ -6,7 +6,7 @@ services:
     ports:
       - 8761:8761
     deploy:
-      replicas: 2
+      replicas: 1
   gateway-backend:
     image: logicalenigma/gateway-backend:0.0.1-SNAPSHOT
     depends_on:
@@ -14,9 +14,9 @@ services:
     ports: 
       - 8080:8080
     environment:
-      JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://discovery-server:8761/eureka'
+      JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://discovery-server:8761/eureka -Dspring.cloud.inetutils.preferredNetworks=10.0'
     deploy:
-      replicas: 3
+      replicas: 1
   service-hostinfo:
     image: logicalenigma/service-hostinfo:0.0.1-SNAPSHOT
     depends_on:
@@ -24,6 +24,6 @@ services:
     ports: 
       - 8101:8101
     environment:
-      JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://discovery-server:8761/eureka'
+      JAVA_OPTS: '-Deureka.client.service-url.defaultZone=http://discovery-server:8761/eureka -Dspring.cloud.inetutils.preferredNetworks=10.0'
     deploy:
-      replicas: 5
+      replicas: 2
