@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gateway-backend-deploy
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: gateway-backend
+    spec:
+      containers:
+      - name: gateway-backend
+        image: logicalenigma/gateway-backend:0.0.1-SNAPSHOT
+        ports:
+        - containerPort: 8080
+        env:
+        - name: JAVA_OPTS
+          value: "-Deureka.client.service-url.defaultZone=http://$(DISCOVERY_SERVER_SVC_SERVICE_HOST):$(DISCOVERY_SERVER_SVC_SERVICE_PORT)/eureka"
+
+
