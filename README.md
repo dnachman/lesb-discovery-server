@@ -17,5 +17,5 @@ Notes:
 
 
 Building for Raspberry Pi:
-docker build -f ./Dockerfile.rpi -t logicalenigma/discovery-server:latest-arm .
-docker push logicalenigma/discovery-server:latest-arm
+docker build -f ./Dockerfile.rpi -t logicalenigma/discovery-server:latest-rpi .
+docker push logicalenigma/discovery-server:latest-rpi
