@@ -14,3 +14,8 @@ A spring boot / spring cloud end to end example
 
 Notes:
 - https://github.com/spring-cloud/spring-cloud-netflix/issues/1820
+
+
+Building for Raspberry Pi:
+docker build -f ./Dockerfile.rpi -t logicalenigma/discovery-server:latest-arm .
+docker push logicalenigma/discovery-server:latest-arm
