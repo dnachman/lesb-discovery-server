@@ -17,8 +17,9 @@ spec:
     spec:
       containers:
       - name: discovery-server
-        image: logicalenigma/discovery-server:latest-arm
+        image: logicalenigma/discovery-server:rpi
         ports:
         - containerPort: 8761
+        imagePullPolicy: Always
 
 
