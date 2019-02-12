@@ -35,7 +35,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":rpi-${env.BUILD_ID}", "-f Dockerfile.rpi .")
+							def dockerImage = docker.build(repository + ":rpi-${env.BUILD_ID}", '-f Dockerfile.rpi .')
 							docker.withRegistry('', registryCredential) {
 								dockerImage.tag('rpi')
 								dockerImage.push()
