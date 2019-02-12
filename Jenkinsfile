@@ -1,5 +1,4 @@
-def pom
-
+def POM_VERSION = 'UNKNOWN'
 pipeline {
     environment {
         repository = "logicalenigma/discovery-server"
@@ -18,7 +17,7 @@ pipeline {
 				// Run the maven build
       	sh "./mvnw -Dmaven.test.failure.ignore clean package"
 				script {
-					pom = readMavenPom()
+					POM_VERSION = readMavenPom().getVersion()
 				}
 			}
    	}
@@ -28,7 +27,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":" + pom.getVersion())
+							def dockerImage = docker.build(repository + ":${POM_VERSION}"
 							docker.withRegistry('', registryCredential) {
 								dockerImage.tag('latest')
 								dockerImage.push()
@@ -40,7 +39,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImageRpi = docker.build(repository + ":rpi-" + pom.getVersion(), '-f Dockerfile.rpi .')
+							def dockerImageRpi = docker.build(repository + ":rpi-${POM_VERSION}", '-f Dockerfile.rpi .')
 							docker.withRegistry('', registryCredential) {
 								dockerImageRpi.tag('rpi')
 								dockerImageRpi.push()
@@ -53,8 +52,8 @@ pipeline {
 		}
 		stage('Remove Unused docker image') {
             steps{
-                sh "docker rmi $repository:amd64-$BUILD_ID"
-                sh "docker rmi $repository:rpi-$BUILD_ID"
+                sh "docker rmi $repository:${POM_VERSION}"
+                sh "docker rmi $repository:rpi-${POM_VERSION}"
             }
         }
 		stage('Results') {
