@@ -1,3 +1,5 @@
+def pom
+
 pipeline {
     environment {
         repository = "logicalenigma/discovery-server"
@@ -15,6 +17,9 @@ pipeline {
 			steps {
 				// Run the maven build
       	sh "./mvnw -Dmaven.test.failure.ignore clean package"
+				script {
+					pom = readMavenPom()
+				}
 			}
    	}
 		stage('Package/Push image') {
@@ -23,7 +28,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":${POM_VERSION}")
+							def dockerImage = docker.build(repository + ":" + pom.getVersion())
 							docker.withRegistry('', registryCredential) {
 								dockerImage.tag('latest')
 								dockerImage.push()
@@ -35,7 +40,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImageRpi = docker.build(repository + ":rpi-${POM_VERSION}", '-f Dockerfile.rpi .')
+							def dockerImageRpi = docker.build(repository + ":rpi-" + pom.getVersion(), '-f Dockerfile.rpi .')
 							docker.withRegistry('', registryCredential) {
 								dockerImageRpi.tag('rpi')
 								dockerImageRpi.push()
