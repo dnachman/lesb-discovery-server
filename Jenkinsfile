@@ -29,8 +29,8 @@ pipeline {
 								// build docker image
 							def dockerImage = docker.build(repository + ":${POM_VERSION}")
 							docker.withRegistry('', registryCredential) {
-								dockerImage.tag('latest')
 								dockerImage.push()
+								dockerImage.push('latest')
 							}
 			    	}
 					}
@@ -41,8 +41,8 @@ pipeline {
 								// build docker image
 							def dockerImageRpi = docker.build(repository + ":rpi-${POM_VERSION}", '-f Dockerfile.rpi .')
 							docker.withRegistry('', registryCredential) {
-								dockerImageRpi.tag('rpi')
 								dockerImageRpi.push()
+								dockerImageRpi.push('rpi')
 							}
 			    	}
 					}
