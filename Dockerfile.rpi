@@ -1,10 +1,3 @@
-
-# Baseimage specially for raspberry pi usage
-#FROM resin/rpi-raspbian:jessie
-#VOLUME /tmp
-# Installing openjdk-8-headless like in the standard Docker container
-#RUN apt-get update && apt-get install -y \
-#      openjdk-8-jre-headless
 FROM arm32v7/openjdk:8-jdk-stretch
 VOLUME /tmp
 ARG JAVA_OPTS

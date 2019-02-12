@@ -10,6 +10,7 @@ A spring boot / spring cloud end to end example
 |app-home|8001|Not implemented yet||
 |service-hostinfo|8101|logicalenigma/service-hostinfo|https://github.com/dnachman/lesb-service-hostinfo|
 |service-comments|8102|Coming soon|https://github.com/dnachman/lesb-service-comments|
+|sb-admin|8899|Coming soon|https://github.com/dnachman/sb-admin|
 
 
 Notes:
