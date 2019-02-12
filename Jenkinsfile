@@ -18,22 +18,38 @@ pipeline {
 			}
    	}
 		stage('Package/Push image') {
-			steps {
-			    script {
-			        // build docker image
-    				def dockerImage = docker.build(repository + ":build-${env.BUILD_ID}")
-    				docker.withRegistry('', registryCredential) {
-							dockerImage.tag(latest)
-    				  dockerImage.push()
-								
-    				}
-			    }
-				
+			parallel {
+				stage ('amd64') {
+					steps {
+						script {
+								// build docker image
+							def dockerImage = docker.build(repository + ":amd64-${env.BUILD_ID}")
+							docker.withRegistry('', registryCredential) {
+								dockerImage.tag('latest')
+								dockerImage.push()
+							}
+			    	}
+					}
+				}
+				stage ('rpi') {
+					steps {
+						script {
+								// build docker image
+							def dockerImage = docker.build(repository + ":rpi-${env.BUILD_ID}", "-f Dockerfile.rpi .")
+							docker.withRegistry('', registryCredential) {
+								dockerImage.tag('rpi')
+								dockerImage.push()
+							}
+			    	}
+					}
+				}
 			}
+			
 		}
 		stage('Remove Unused docker image') {
             steps{
-                sh "docker rmi $registry:build-$BUILD_NUMBER"
+                sh "docker rmi $repository:amd64-$BUILD_ID"
+                sh "docker rmi $repository:rpi-$BUILD_ID"
             }
         }
 		stage('Results') {
