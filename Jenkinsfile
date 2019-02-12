@@ -1,6 +1,6 @@
 pipeline {
     environment {
-        registry = "logicalenigma/discovery-server"
+        repository = "logicalenigma/discovery-server"
         registryCredential = 'docker-hub'
     }
 	agent any
@@ -14,16 +14,18 @@ pipeline {
 		stage('Build') {
 			steps {
 				// Run the maven build
-      	        sh "./mvnw -Dmaven.test.failure.ignore clean package"
+      	sh "./mvnw -Dmaven.test.failure.ignore clean package"
 			}
    	}
 		stage('Package/Push image') {
 			steps {
 			    script {
 			        // build docker image
-    				def dockerImage = docker.build(registry + ":build-${env.BUILD_ID}")
+    				def dockerImage = docker.build(repository + ":build-${env.BUILD_ID}")
     				docker.withRegistry('', registryCredential) {
-    				    dockerImage.push()
+							dockerImage.tag(latest)
+    				  dockerImage.push()
+								
     				}
 			    }
 				
