@@ -1,4 +1,4 @@
-def POM_VERSION = 'UNKNOWN'
+def POM_VERSION = "UNKNOWN"
 pipeline {
     environment {
         repository = "logicalenigma/discovery-server"
@@ -27,7 +27,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":${POM_VERSION}"
+							def dockerImage = docker.build(repository + ":${POM_VERSION}")
 							docker.withRegistry('', registryCredential) {
 								dockerImage.tag('latest')
 								dockerImage.push()
