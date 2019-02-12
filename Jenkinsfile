@@ -23,7 +23,7 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":amd64-${env.BUILD_ID}")
+							def dockerImage = docker.build(repository + ":${POM_VERSION}")
 							docker.withRegistry('', registryCredential) {
 								dockerImage.tag('latest')
 								dockerImage.push()
@@ -35,10 +35,10 @@ pipeline {
 					steps {
 						script {
 								// build docker image
-							def dockerImage = docker.build(repository + ":rpi-${env.BUILD_ID}", '-f Dockerfile.rpi .')
+							def dockerImageRpi = docker.build(repository + ":rpi-${POM_VERSION}", '-f Dockerfile.rpi .')
 							docker.withRegistry('', registryCredential) {
-								dockerImage.tag('rpi')
-								dockerImage.push()
+								dockerImageRpi.tag('rpi')
+								dockerImageRpi.push()
 							}
 			    	}
 					}
