@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: service-hostinfo-deploy
+spec:
+  replicas: 1
+  minReadySeconds: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: service-hostinfo
+    spec:
+      containers:
+      - name: service-hostinfo
+        image: logicalenigma/service-hostinfo:rpi
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8101
+        env:
+        - name: JAVA_OPTS
+          value: "-Deureka.client.service-url.defaultZone=http://$(DISCOVERY_SERVER_SVC_SERVICE_HOST):$(DISCOVERY_SERVER_SVC_SERVICE_PORT)/eureka"
+
+
