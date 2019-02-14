@@ -1,4 +1,4 @@
 #!/bin/bash
 
-export NAME=myfirstcluster.k8s.local
-export KOPS_STATE_STORE=s3://logicalenigma-myfirstcluster-state-store
+export NAME=dev.cloud.logicalenigma.com
+export KOPS_STATE_STORE=s3://clusters.cloud.logicalenigma.com
