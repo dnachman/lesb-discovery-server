@@ -1,3 +1,4 @@
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -23,6 +24,6 @@ spec:
         - containerPort: 8101
         env:
         - name: JAVA_OPTS
-          value: "-Deureka.client.service-url.defaultZone=http://$(DISCOVERY_SERVER_SVC_SERVICE_HOST):$(DISCOVERY_SERVER_SVC_SERVICE_PORT)/eureka"
-
+          #value: "-Deureka.client.service-url.defaultZone=http://$(DISCOVERY_SERVER_SVC_SERVICE_HOST):$(DISCOVERY_SERVER_SVC_SERVICE_PORT)/eureka"
+          value: "-Dspring.cloud.discovery.enabled=false"
 
